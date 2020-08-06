@@ -3,14 +3,16 @@ import dayjs from "dayjs";
 
 import * as styles from "./style.css";
 import { Typography } from "@material-ui/core";
-import { isSameDay, isSameMonth, isFirstDay } from "../../services/calendar";
+import { isSameDay, isSameMonth, isFirstDay, getMonth } from "../../services/calendar";
 
-const CalendarElement = ({ day }) => {
+const CalendarElement = ({ day, month }) => {
+  const isCurrentMonth = isSameMonth(day, getMonth(month));
+  const textColor = isCurrentMonth ? "textPrimary" : "textSecondary";
+
   // 月の最初だけ月情報をつける
   const format = isFirstDay(day) ? "M月D日" : "D";
   const today = dayjs();
   const isToday = isSameDay(day, today);
-  const textColor = isSameMonth(day, today) ? "textPrimary" : "textSecondary";
 
   return (
     <div className={styles.element}>

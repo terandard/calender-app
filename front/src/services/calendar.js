@@ -32,3 +32,16 @@ export const isSameMonth = (m1, m2) => {
 };
 
 export const isFirstDay = day => day.date() === 1;
+
+const getMonthStateCreator = diff => month => {
+  const day = getMonth(month).add(diff, "month");
+  return formatMonth(day);
+};
+
+export const getNextMonth = getMonthStateCreator(1);
+export const getPreviousMonth = getMonthStateCreator(-1);
+
+export const formatMonth = day => ({
+  month: day.month() + 1,
+  year: day.year()
+});
