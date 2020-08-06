@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const App = () => <di>hello react!!</di>;
+import CalendarBoard from "./components/CalendarBoard";
+
+const App = () => (
+    <CalendarBoard />
+);
 
 ReactDOM.render(<App />, document.getElementById("root"));
