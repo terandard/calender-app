@@ -3,12 +3,10 @@ import { GridList, Typography } from '@material-ui/core';
 import * as styles from "./style.css";
 
 import CalenderElement from "../CalendarElement";
-import { createCalendar } from "../../services/calendar";
 
-const calendar = createCalendar();
 const days = ["日", "月", "火", "水", "木", "金", "土"];
 
-const CalenderBoard = () => {
+const CalenderBoard = ({ calendar }) => {
     console.log(calendar);
     return (
         <div className={styles.container}>

@@ -3,10 +3,9 @@ import "dayjs/locale/ja";
 
 dayjs.locale("ja");
 
-export const createCalendar = () => {
+export const createCalendar = month => {
   // 今月の最初の日を追加
-  const firstDay = dayjs().startOf("month");
-
+  const firstDay = getMonth(month);
   const firstDayIndex = firstDay.day();
 
   return Array(35)
@@ -17,6 +16,10 @@ export const createCalendar = () => {
       return day;
     });
 };
+
+export const getMonth = ({ year, month }) => {
+  return dayjs(`${year}-${month}`);
+}
 
 export const isSameDay = (d1, d2) => {
     const format = "YYYYMMDD";
