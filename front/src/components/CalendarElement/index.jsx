@@ -4,8 +4,9 @@ import dayjs from "dayjs";
 import * as styles from "./style.css";
 import { Typography } from "@material-ui/core";
 import { isSameDay, isSameMonth, isFirstDay, getMonth } from "../../services/calendar";
+import Schedule from "../Schedule";
 
-const CalendarElement = ({ day, month }) => {
+const CalendarElement = ({ day, month, schedules }) => {
   const isCurrentMonth = isSameMonth(day, getMonth(month));
   const textColor = isCurrentMonth ? "textPrimary" : "textSecondary";
 
@@ -26,6 +27,11 @@ const CalendarElement = ({ day, month }) => {
             {day.format(format)}
           </span>
       </Typography>
+      <div className={styles.schedules}>
+        {schedules.map(e => (
+          <Schedule key={e.id} schedule={e} />
+        ))}
+      </div>
     </div>
   );
 };
