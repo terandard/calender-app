@@ -6,7 +6,7 @@ import { Typography } from "@material-ui/core";
 import { isSameDay, isSameMonth, isFirstDay, getMonth } from "../../services/calendar";
 import Schedule from "../Schedule";
 
-const CalendarElement = ({ day, month, schedules }) => {
+const CalendarElement = ({ day, month, schedules, onClickSchedule }) => {
   const isCurrentMonth = isSameMonth(day, getMonth(month));
   const textColor = isCurrentMonth ? "textPrimary" : "textSecondary";
 
@@ -29,7 +29,9 @@ const CalendarElement = ({ day, month, schedules }) => {
       </Typography>
       <div className={styles.schedules}>
         {schedules.map(e => (
-          <Schedule key={e.id} schedule={e} />
+          <Schedule key={e.id}
+                    schedule={e}
+                    onClickSchedule={onClickSchedule} />
         ))}
       </div>
     </div>

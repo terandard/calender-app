@@ -6,8 +6,12 @@ import CalenderElement from "../CalendarElement";
 
 const days = ["日", "月", "火", "水", "木", "金", "土"];
 
-const CalenderBoard = ({ calendar, month, openAddScheduleDialog }) => {
-    console.log(calendar);
+const CalendarBoard = ({
+    calendar,
+    month,
+    openAddScheduleDialog,
+    openCurrentScheduleDialog
+}) => {
     return (
         <div className={styles.container}>
             <GridList className={styles.grid} cols={7} spacing={0} cellHeight="auto">
@@ -25,7 +29,10 @@ const CalenderBoard = ({ calendar, month, openAddScheduleDialog }) => {
                 ))}
                 {calendar.map(({ date, schedules }) => (
                     <li key={date.toISOString()} onClick={() => openAddScheduleDialog(date)}>
-                        <CalenderElement day={date} month={month} schedules={schedules} />
+                        <CalenderElement day={date}
+                                         month={month}
+                                         schedules={schedules}
+                                         onClickSchedule={openCurrentScheduleDialog} />
                     </li>
                 ))}
             </GridList>
@@ -33,4 +40,4 @@ const CalenderBoard = ({ calendar, month, openAddScheduleDialog }) => {
     );
 }
 
-export default CalenderBoard;
+export default CalendarBoard;

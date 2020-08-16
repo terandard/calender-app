@@ -1,7 +1,13 @@
 import { connect } from "react-redux";
 import { createCalendar } from "../../services/calendar";
 import { setSchedules } from "../../services/schedule";
-import { addScheduleOpenDialog, addScheduleSetValue } from "../../redux/addSchedule/actions";
+import {
+    addScheduleOpenDialog, addScheduleSetValue
+} from "../../redux/addSchedule/actions";
+import {
+    currentScheduleSetItem,
+    currentScheduleOpenDialog
+} from "../../redux/currentSchedule/actions";
 import CalendarBoard from "./presentation";
 
 const mapStateToProps = state => ({
@@ -13,6 +19,13 @@ const mapDispatchToProps = dispatch => ({
     openAddScheduleDialog: d => {
         dispatch(addScheduleSetValue({ date: d }));
         dispatch(addScheduleOpenDialog());
+    },
+    openCurrentScheduleDialog: (schedule, e) => {
+        // 他のイベントが発火するのをキャンセル
+        e.stopPropagation();
+
+        dispatch(currentScheduleSetItem(schedule));
+        dispatch(currentScheduleOpenDialog());
     }
 });
 
