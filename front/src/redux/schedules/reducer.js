@@ -12,6 +12,9 @@ const schedulesReducer = (state = init, action) => {
         case SCHEDULES_ADD_ITEM:
             return {
                 ...state,
+                isLoading: false,
+                items: [...state.items, payload]
+            };
         case SCHEDULES_SET_LOADING:
             return {
                 ...state,
@@ -25,7 +28,6 @@ const schedulesReducer = (state = init, action) => {
             };
         default:
             return state;
-
     }
 };
 
