@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import { createCalendar } from "../../services/calendar";
 import { setSchedules } from "../../services/schedule";
-import { asyncSchedulesFetchItem } from "../../redux/schedules/effects";
 import {
     addScheduleOpenDialog, addScheduleSetValue
 } from "../../redux/addSchedule/actions";
@@ -27,9 +26,6 @@ const mapDispatchToProps = dispatch => ({
 
         dispatch(currentScheduleSetItem(schedule));
         dispatch(currentScheduleOpenDialog());
-    },
-    fetchSchedule: month => {
-        dispatch(asyncSchedulesFetchItem(month));
     }
 });
 
@@ -43,7 +39,6 @@ const mergeProps = (stateProps, dispatchProps) => {
     return {
         ...stateProps,
         ...dispatchProps,
-        fetchSchedule: () => dispatchProps.fetchSchedule(month),
         calendar,
         month
     };
