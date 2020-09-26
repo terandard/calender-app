@@ -10,7 +10,8 @@ import {
 } from "@material-ui/core";
 import {
     Close, LocationOnOutlined,
-    NotesOutlined, DeleteOutlineOutlined
+    NotesOutlined, DeleteOutlineOutlined,
+    Edit
 } from "@material-ui/icons";
 
 import styles from "./style.css";
@@ -22,12 +23,18 @@ const spacer = (top, bottom) => ({
 const CurrentScheduleDialog = ({
     schedule: { item, isDialogOpen },
     closeDialog,
+    editItem,
     deleteItem
 }) => {
     return (
         <Dialog open={isDialogOpen} onClose={closeDialog} maxWidth="xs" fullWidth>
             <DialogActions>
                 <div className={styles.closeButton}>
+                    <Tooltip title="編集" placement="bottom">
+                        <IconButton onClick={editItem} size="small">
+                            <Edit />
+                        </IconButton>
+                    </Tooltip>
                     <Tooltip title="削除" placement="bottom">
                         <IconButton onClick={deleteItem} size="small">
                             <DeleteOutlineOutlined />

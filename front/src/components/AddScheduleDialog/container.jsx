@@ -1,10 +1,12 @@
 import AddScheduleDialog from "./presentation";
 import { connect } from "react-redux";
 import { addScheduleCloseDialog, addScheduleSetValue, addScheduleStartEdit } from "../../redux/addSchedule/actions";
-import { schedulesAddItem } from "../../redux/schedules/actions";
+import { schedulesAddItem, schedulesEditItem } from "../../redux/schedules/actions";
 import { isCloseDialog } from "../../services/schedule";
 
-const mapStateToProps = state => ({ schedule: state.addSchedule });
+const mapStateToProps = state => ({
+    schedule: state.addSchedule, all_schedules: state.schedules
+});
 
 const mapDispatchToProps = dispatch => ({
     closeDialog: () => {
@@ -13,10 +15,18 @@ const mapDispatchToProps = dispatch => ({
     setSchedule: value => {
         dispatch(addScheduleSetValue(value));
     },
-    saveSchedule: schedule => {
+    saveSchedule: (schedule, currentSchedules) => {
         if (schedule.title) {
-            dispatch(schedulesAddItem(schedule));
-            dispatch(addScheduleCloseDialog());
+            if (schedule.id) {
+                // スケジュールを編集
+                currentSchedules[schedule.id -1] = schedule;
+                dispatch(schedulesEditItem(currentSchedules));
+                dispatch(addScheduleCloseDialog());
+            } else {
+                // スケジュールを新規追加
+                dispatch(schedulesAddItem(schedule));
+                dispatch(addScheduleCloseDialog());
+            }
         }
     },
     setIsEditStart: () => {
@@ -28,12 +38,13 @@ const mergeProps = (stateProps, dispatchProps) => {
     const {
         schedule: { form: schedule }
     } = stateProps;
+    const currentSchedules = stateProps.all_schedules.items;
 
     return {
         ...stateProps,
         ...dispatchProps,
         saveSchedule: () => {
-            dispatchProps.saveSchedule(schedule);
+            dispatchProps.saveSchedule(schedule, currentSchedules);
         },
         closeDialog: () => {
             if (isCloseDialog(schedule)) {

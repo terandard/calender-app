@@ -1,7 +1,8 @@
 import {
     SCHEDULES_ADD_ITEM, SCHEDULES_FETCH_ITEM,
     SCHEDULES_SET_LOADING, SCHEDULES_DELETE_ITEM,
-    SCHEDULES_ASYNC_FAILURE, SCHEDULES_RESET_ERROR
+    SCHEDULES_ASYNC_FAILURE, SCHEDULES_RESET_ERROR,
+    SCHEDULES_EDIT_ITEM
 } from "./actions";
 
 const init = {
@@ -19,6 +20,12 @@ const schedulesReducer = (state = init, action) => {
                 ...state,
                 isLoading: false,
                 items: [...state.items, { ...payload, id: state.items.length + 1 }]
+            };
+        case SCHEDULES_EDIT_ITEM:
+            return {
+                ...state,
+                isLoading: false,
+                items: payload
             };
         case SCHEDULES_SET_LOADING:
             return {
