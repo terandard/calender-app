@@ -19,8 +19,9 @@ const mapDispatchToProps = dispatch => ({
         if (schedule.title) {
             if (schedule.id) {
                 // スケジュールを編集
-                currentSchedules[schedule.id -1] = schedule;
-                dispatch(schedulesEditItem(currentSchedules));
+                let newSchedules = currentSchedules.filter(s => s.id !== schedule.id);
+                newSchedules.push(schedule);
+                dispatch(schedulesEditItem(newSchedules));
                 dispatch(addScheduleCloseDialog());
             } else {
                 // スケジュールを新規追加

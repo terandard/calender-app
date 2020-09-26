@@ -11,15 +11,18 @@ const init = {
     error: null
 };
 
+let id = 0;
+
 const schedulesReducer = (state = init, action) => {
     const { type, payload, error } = action;
 
     switch (type) {
         case SCHEDULES_ADD_ITEM:
+            id += 1;
             return {
                 ...state,
                 isLoading: false,
-                items: [...state.items, { ...payload, id: state.items.length + 1 }]
+                items: [...state.items, { ...payload, id: id }]
             };
         case SCHEDULES_EDIT_ITEM:
             return {
