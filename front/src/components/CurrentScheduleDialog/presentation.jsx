@@ -54,12 +54,12 @@ const CurrentScheduleDialog = ({
                                 <span className={styles.box}></span>
                             </Grid>
                             <Grid item xs={10}>
-                                <Typography variant="h5" component="h2">
+                                <h2 className={styles.item}>
                                     {item.title}
-                                </Typography>
-                                <Typography color="textSecondary">
+                                </h2>
+                                <p className={styles.date}>
                                     {item.date.format("M月 D日")}
-                                </Typography>
+                                </p>
                             </Grid>
                         </Grid>
                     </div>
@@ -74,7 +74,7 @@ const CurrentScheduleDialog = ({
                                 <LocationOnOutlined />
                             </Grid>
                             <Grid item xs={10}>
-                                <Typography>{item.location}</Typography>
+                                <p className={styles.item}>{item.location}</p>
                             </Grid>
                         </Grid>
                     )}
@@ -88,7 +88,7 @@ const CurrentScheduleDialog = ({
                                 <NotesOutlined />
                             </Grid>
                             <Grid item xs={10}>
-                                <Typography>{item.description}</Typography>
+                                <p className={styles.item}>{item.description}</p>
                             </Grid>
                         </Grid>
                     )}

@@ -19,6 +19,6 @@
 }
 
 .schedules {
-  overflow: scroll;
+  overflow: hidden;
   height: calc(18vh - 40px);
 }
